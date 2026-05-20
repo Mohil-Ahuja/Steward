@@ -1,0 +1,2 @@
+"""Steward MCP authorization proxy."""
+
