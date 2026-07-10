@@ -1,0 +1,5 @@
+[
+  {"name": "read allowed", "request": {"subject": "agent-a", "server": "crm", "tool": "contacts.read", "arguments": {}}, "expected_allowed": true},
+  {"name": "write denied", "request": {"subject": "agent-a", "server": "crm", "tool": "contacts.delete", "arguments": {}}, "expected_allowed": false}
+]
+
