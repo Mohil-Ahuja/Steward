@@ -1,7 +1,34 @@
+# Python
 __pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Tooling caches
 .pytest_cache/
 .ruff_cache/
+.mypy_cache/
+
+# Environments
 .venv/
-*.egg-info/
+venv/
+env/
+
+# Local state
 *.db
+*.db-journal
 .env
+
+# Generated reports. `reports/latest` is committed as the published result;
+# everything else is scratch from local runs.
+reports/*
+!reports/latest/
+!reports/latest/**
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

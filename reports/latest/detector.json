@@ -1,0 +1,373 @@
+{
+  "feature_names": [
+    "n_calls",
+    "log_duration_s",
+    "calls_per_minute",
+    "n_distinct_tools",
+    "tool_entropy",
+    "top_tool_share",
+    "distinct_arg_ratio",
+    "max_repeat_run",
+    "denied_share",
+    "distinct_reason_codes",
+    "max_risk_tier",
+    "mean_risk_tier",
+    "write_share",
+    "injection_flag_share",
+    "distinct_servers",
+    "mean_latency_ms"
+  ],
+  "scaler_mean": [
+    16.194616977225675,
+    3.5044376077219677,
+    49.02376594919903,
+    2.393374741200828,
+    0.8629606672479002,
+    0.7047485588970347,
+    0.7234549370234298,
+    13.875776397515528,
+    0.06960904256441018,
+    1.2877846790890268,
+    2.2650103519668736,
+    1.5814194063697424,
+    0.2841200658120709,
+    0.004111252599865436,
+    1.784679089026915,
+    197.10294604780015
+  ],
+  "scaler_scale": [
+    18.860263419169357,
+    0.7299992454932727,
+    64.77142433672631,
+    1.7274179196398414,
+    0.9421077437834254,
+    0.31504171763869393,
+    0.30581342972030334,
+    19.722219321268426,
+    0.13516023750361247,
+    0.45273022604046614,
+    1.2982538638998635,
+    0.6775651221905373,
+    0.3290379983488101,
+    0.02640780861078933,
+    0.9496720860008403,
+    47.79499886342886
+  ],
+  "weights": [
+    1.4791996949329829,
+    2.3209044594735793,
+    2.528708557663741,
+    1.1254218413940171,
+    -1.3733148601270697,
+    2.9467399457276997,
+    2.8506536574624937,
+    -0.8464972194603787,
+    1.4421615712748,
+    -1.8155947644946018,
+    1.125253055170765,
+    0.26111624753600393,
+    0.344685314598398,
+    1.588065105569094,
+    0.8330156160495747,
+    0.22858351240492836
+  ],
+  "bias": -2.9846768003239967,
+  "threshold": 0.8086538030514216,
+  "metrics": {
+    "n_sessions": 690,
+    "n_train": 483,
+    "n_test": 207,
+    "positive_rate": 0.13043478260869565,
+    "supervised": {
+      "roc_auc": 0.9987654320987654,
+      "average_precision": 0.9912460078241077,
+      "expected_calibration_error": 0.06103069178902744,
+      "operating_point": {
+        "threshold": 0.8086538030514216,
+        "true_positive": 27,
+        "false_positive": 1,
+        "false_negative": 0,
+        "true_negative": 179,
+        "precision": 0.9642857142857143,
+        "recall": 1.0,
+        "f1": 0.9818181818181818
+      },
+      "target_precision": 0.9,
+      "achieved_precision": 0.9642857142857143,
+      "recall_at_target": 1.0
+    },
+    "unsupervised": {
+      "roc_auc": 0.9886831275720165,
+      "average_precision": 0.9550943657683184
+    },
+    "coefficients": [
+      {
+        "feature": "top_tool_share",
+        "weight": 2.9467399457276997
+      },
+      {
+        "feature": "distinct_arg_ratio",
+        "weight": 2.8506536574624937
+      },
+      {
+        "feature": "calls_per_minute",
+        "weight": 2.528708557663741
+      },
+      {
+        "feature": "log_duration_s",
+        "weight": 2.3209044594735793
+      },
+      {
+        "feature": "distinct_reason_codes",
+        "weight": -1.8155947644946018
+      },
+      {
+        "feature": "injection_flag_share",
+        "weight": 1.588065105569094
+      },
+      {
+        "feature": "n_calls",
+        "weight": 1.4791996949329829
+      },
+      {
+        "feature": "denied_share",
+        "weight": 1.4421615712748
+      },
+      {
+        "feature": "tool_entropy",
+        "weight": -1.3733148601270697
+      },
+      {
+        "feature": "n_distinct_tools",
+        "weight": 1.1254218413940171
+      },
+      {
+        "feature": "max_risk_tier",
+        "weight": 1.125253055170765
+      },
+      {
+        "feature": "max_repeat_run",
+        "weight": -0.8464972194603787
+      },
+      {
+        "feature": "distinct_servers",
+        "weight": 0.8330156160495747
+      },
+      {
+        "feature": "write_share",
+        "weight": 0.344685314598398
+      },
+      {
+        "feature": "mean_risk_tier",
+        "weight": 0.26111624753600393
+      },
+      {
+        "feature": "mean_latency_ms",
+        "weight": 0.22858351240492836
+      }
+    ],
+    "calibration": [
+      {
+        "bin_low": 0.0,
+        "bin_high": 0.1,
+        "count": 148,
+        "mean_predicted": 0.025426411036739538,
+        "observed_rate": 0.0
+      },
+      {
+        "bin_low": 0.1,
+        "bin_high": 0.2,
+        "count": 15,
+        "mean_predicted": 0.13966701396898712,
+        "observed_rate": 0.0
+      },
+      {
+        "bin_low": 0.2,
+        "bin_high": 0.30000000000000004,
+        "count": 6,
+        "mean_predicted": 0.24009544913331718,
+        "observed_rate": 0.0
+      },
+      {
+        "bin_low": 0.30000000000000004,
+        "bin_high": 0.4,
+        "count": 4,
+        "mean_predicted": 0.33667397896588735,
+        "observed_rate": 0.0
+      },
+      {
+        "bin_low": 0.4,
+        "bin_high": 0.5,
+        "count": 2,
+        "mean_predicted": 0.43995620733346774,
+        "observed_rate": 0.0
+      },
+      {
+        "bin_low": 0.5,
+        "bin_high": 0.6000000000000001,
+        "count": 2,
+        "mean_predicted": 0.5115820005678238,
+        "observed_rate": 0.0
+      },
+      {
+        "bin_low": 0.6000000000000001,
+        "bin_high": 0.7000000000000001,
+        "count": 2,
+        "mean_predicted": 0.6816327354154845,
+        "observed_rate": 0.0
+      },
+      {
+        "bin_low": 0.8,
+        "bin_high": 0.9,
+        "count": 1,
+        "mean_predicted": 0.8086538030514216,
+        "observed_rate": 1.0
+      },
+      {
+        "bin_low": 0.9,
+        "bin_high": 1.0,
+        "count": 27,
+        "mean_predicted": 0.9826030541892903,
+        "observed_rate": 0.9629629629629629
+      }
+    ],
+    "by_profile": {
+      "bulk_report": {
+        "label": 0,
+        "n": 47,
+        "flagged": 0,
+        "flag_rate": 0.0
+      },
+      "drip_spend": {
+        "label": 1,
+        "n": 5,
+        "flagged": 5,
+        "flag_rate": 1.0
+      },
+      "enumeration": {
+        "label": 1,
+        "n": 5,
+        "flagged": 5,
+        "flag_rate": 1.0
+      },
+      "exfiltration": {
+        "label": 1,
+        "n": 5,
+        "flagged": 5,
+        "flag_rate": 1.0
+      },
+      "focused_batch": {
+        "label": 0,
+        "n": 45,
+        "flagged": 0,
+        "flag_rate": 0.0
+      },
+      "probing": {
+        "label": 1,
+        "n": 7,
+        "flagged": 7,
+        "flag_rate": 1.0
+      },
+      "stealth_enumeration": {
+        "label": 1,
+        "n": 5,
+        "flagged": 5,
+        "flag_rate": 1.0
+      },
+      "task": {
+        "label": 0,
+        "n": 53,
+        "flagged": 1,
+        "flag_rate": 0.018867924528301886
+      },
+      "with_denial": {
+        "label": 0,
+        "n": 35,
+        "flagged": 0,
+        "flag_rate": 0.0
+      }
+    },
+    "ablation": [
+      {
+        "removed": "distinct_arg_ratio",
+        "average_precision": 0.9589547798264412,
+        "delta": -0.03229122799766648
+      },
+      {
+        "removed": "injection_flag_share",
+        "average_precision": 0.972549921897748,
+        "delta": -0.01869608592635963
+      },
+      {
+        "removed": "log_duration_s",
+        "average_precision": 0.9777576489533011,
+        "delta": -0.013488358870806572
+      },
+      {
+        "removed": "distinct_reason_codes",
+        "average_precision": 0.985293550083655,
+        "delta": -0.00595245774045261
+      },
+      {
+        "removed": "denied_share",
+        "average_precision": 0.9854178853293185,
+        "delta": -0.005828122494789145
+      },
+      {
+        "removed": "n_calls",
+        "average_precision": 0.9877988377102709,
+        "delta": -0.0034471701138367727
+      },
+      {
+        "removed": "max_risk_tier",
+        "average_precision": 0.9877988377102709,
+        "delta": -0.0034471701138367727
+      },
+      {
+        "removed": "max_repeat_run",
+        "average_precision": 0.9895625061406059,
+        "delta": -0.0016835016835017313
+      },
+      {
+        "removed": "n_distinct_tools",
+        "average_precision": 0.9912460078241077,
+        "delta": 0.0
+      },
+      {
+        "removed": "tool_entropy",
+        "average_precision": 0.9912460078241077,
+        "delta": 0.0
+      },
+      {
+        "removed": "mean_risk_tier",
+        "average_precision": 0.9912460078241077,
+        "delta": 0.0
+      },
+      {
+        "removed": "write_share",
+        "average_precision": 0.9912460078241077,
+        "delta": 0.0
+      },
+      {
+        "removed": "top_tool_share",
+        "average_precision": 0.9928563137822397,
+        "delta": 0.0016103059581320522
+      },
+      {
+        "removed": "mean_latency_ms",
+        "average_precision": 0.9928563137822397,
+        "delta": 0.0016103059581320522
+      },
+      {
+        "removed": "distinct_servers",
+        "average_precision": 0.9943995236587829,
+        "delta": 0.003153515834675269
+      },
+      {
+        "removed": "calls_per_minute",
+        "average_precision": 0.9958810051402643,
+        "delta": 0.004634997316156686
+      }
+    ]
+  }
+}

@@ -4,16 +4,41 @@ services:
     environment:
       POSTGRES_DB: steward
       POSTGRES_USER: steward
-      POSTGRES_PASSWORD: steward
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-steward-dev-only}
     ports: ["5432:5432"]
+    volumes:
+      - steward-pgdata:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U steward -d steward"]
-  steward:
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  migrate:
     build: .
+    command: ["alembic", "upgrade", "head"]
     environment:
-      DATABASE_URL: postgresql+asyncpg://steward:steward@postgres:5432/steward
-    ports: ["8000:8000"]
+      DATABASE_URL: postgresql+asyncpg://steward:${POSTGRES_PASSWORD:-steward-dev-only}@postgres:5432/steward
     depends_on:
       postgres:
         condition: service_healthy
 
+  steward:
+    build: .
+    environment:
+      DATABASE_URL: postgresql+asyncpg://steward:${POSTGRES_PASSWORD:-steward-dev-only}@postgres:5432/steward
+      ENVIRONMENT: ${ENVIRONMENT:-development}
+      # Both of these must be set for a real deployment. Compose defaults are
+      # development-only placeholders and the app refuses them in production.
+      AUDIT_CHAIN_KEY: ${AUDIT_CHAIN_KEY:-compose-dev-key-do-not-ship}
+      ADMIN_API_KEYS: ${ADMIN_API_KEYS:-}
+      ALLOW_UNAUTHENTICATED_CONTROL_PLANE: ${ALLOW_UNAUTHENTICATED_CONTROL_PLANE:-true}
+    ports: ["8000:8000"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+
+volumes:
+  steward-pgdata:

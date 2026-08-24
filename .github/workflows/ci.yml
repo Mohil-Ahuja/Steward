@@ -1,0 +1,69 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+
+    env:
+      # The suite must never depend on ambient credentials: the whole point of
+      # the deterministic harness is that it runs with none.
+      AUDIT_CHAIN_KEY: ci-test-key
+      ENVIRONMENT: development
+      ALLOW_UNAUTHENTICATED_CONTROL_PLANE: "true"
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install
+        run: pip install -e ".[dev]"
+
+      - name: Lint
+        run: python -m ruff check steward tests alembic
+
+      - name: Test
+        run: python -m pytest -q
+
+      - name: Migrations apply from scratch
+        run: python -m alembic upgrade head
+        env:
+          DATABASE_URL: sqlite+aiosqlite:///./ci.db
+
+      - name: End-to-end demo
+        run: python -m steward demo
+
+  results:
+    # Regenerates the published numbers on every push, so a change that
+    # quietly weakens a control shows up as a diff in the report rather than
+    # as a stale claim in the README.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: pip install -e ".[dev]"
+      - name: Authorization evaluation
+        run: python -m steward eval --quiet --out reports/ci
+        env:
+          AUDIT_CHAIN_KEY: ci-test-key
+      - name: Detector
+        run: python -m steward detector train --out reports/ci
+      - uses: actions/upload-artifact@v4
+        with:
+          name: steward-reports
+          path: reports/ci

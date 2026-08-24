@@ -1,0 +1,30 @@
+# Upstream MCP servers Steward proxies.
+#
+# Steward is a client to each of these and a server to your agents. Three
+# transports are supported.
+
+upstreams:
+  # A local server launched as a subprocess, speaking newline-delimited
+  # JSON-RPC over stdio. This is how most MCP servers ship today.
+  - name: crm
+    transport: stdio
+    command: ["python", "-m", "your_company.mcp.crm_server"]
+    env:
+      CRM_API_KEY: ${CRM_API_KEY}
+
+  # A remote server over Streamable HTTP. Per the MCP authorization spec an
+  # MCP server is an OAuth 2.1 resource server, so the token below must carry
+  # an audience naming *this* server (RFC 8707 resource indicators). Reusing
+  # one broadly-scoped token across servers is the confused-deputy problem
+  # Steward exists to contain.
+  - name: billing
+    transport: http
+    url: https://billing.internal.example.com/mcp
+    headers:
+      Authorization: Bearer ${BILLING_MCP_TOKEN}
+
+  # A third-party server. Leave trust_tool_annotations false globally so this
+  # server's annotations can only raise a tool's risk tier, never lower it.
+  - name: partner
+    transport: http
+    url: https://partner.example.com/mcp
